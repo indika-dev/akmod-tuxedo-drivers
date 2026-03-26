@@ -37,13 +37,7 @@ jobs:
       - name: Set the latest tuxedo-drivers version
         if: env.TUXEDO_DRIVERS_VERSION == ''
         run: |
-          TUXEDO_DRIVERS_VERSION=$(curl -L \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "X-GitHub-Api-Version: 2026-03-10" \
-            https://api.github.com/repos/tuxedocomputers/tuxedo-drivers/releases/latest)
-          echo $TUXEDO_DRIVERS_VERSION
-          TUXEDO_DRIVERS_VERSION=$(echo $TUXEDO_DRIVERS_VERSION | jq -e '.[] | .tag_name')
+          TUXEDO_DRIVERS_VERSION=$(curl -s https://api.github.com/repos/tuxedocomputers/tuxedo-drivers/tags | jq -e '.[0].name')
           echo "TUXEDO_DRIVERS_VERSION=$TUXEDO_DRIVERS_VERSION" >> $GITHUB_ENV
 
       - name: Check if latest version has been released
