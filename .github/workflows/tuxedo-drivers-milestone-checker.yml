@@ -42,7 +42,7 @@ jobs:
             -H "Authorization: Bearer $GITHUB_TOKEN" \
             -H "X-GitHub-Api-Version: 2026-03-10" \
             https://api.github.com/repos/tuxedocomputers/tuxedo-drivers/releases/latest)
-          TUXEDO_DRIVERS_VERSION=$(echo TUXEDO_DRIVERS_VERSION | jq -e '.[] | .tag_name')
+          TUXEDO_DRIVERS_VERSION=$(echo $TUXEDO_DRIVERS_VERSION | jq -e '.[] | .tag_name')
           echo "TUXEDO_DRIVERS_VERSION=$TUXEDO_DRIVERS_VERSION" >> $GITHUB_ENV
 
       - name: Check if latest version has been released
