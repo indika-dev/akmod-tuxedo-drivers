@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Set the latest tuxedo-drivers version
         if: env.TUXEDO_DRIVERS_VERSION == ''
