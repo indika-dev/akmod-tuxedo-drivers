@@ -38,7 +38,7 @@ jobs:
         if: env.TUXEDO_DRIVERS_VERSION == ''
         run: |
           TUXEDO_DRIVERS_VERSION=$(curl -s https://api.github.com/repos/tuxedocomputers/tuxedo-drivers/tags | jq -e '.[0].name')
-          echo "TUXEDO_DRIVERS_VERSION=${TUXEDO_DRIVERS_VERSION:1}" >> $GITHUB_ENV
+          echo "TUXEDO_DRIVERS_VERSION=${TUXEDO_DRIVERS_VERSION:2:-1}" >> $GITHUB_ENV
 
       - name: Check if latest version has been released
         if: env.FORCE_REPACKAGE == 'false' || env.TUXEDO_DRIVERS_VERSION != ''
