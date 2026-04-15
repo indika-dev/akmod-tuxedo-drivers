@@ -65,4 +65,4 @@ jobs:
           title: Update driver version
           body: Republish a new Tuxedo drivers version
           branch: update-to-${{env.TUXEDO_DRIVERS_VERSION}}
-          token: $GITHUB_TOKEN
+          token: ${{ secrets.PMR_TOKEN }}
