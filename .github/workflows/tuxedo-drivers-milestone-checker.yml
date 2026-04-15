@@ -62,7 +62,7 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           commit-message: update to version ${{env.TUXEDO_DRIVERS_VERSION}}
-          title: Update driver version
+          title: Update driver version to ${{env.TUXEDO_DRIVERS_VERSION}}
           body: Republish a new Tuxedo drivers version
           branch: update-to-${{env.TUXEDO_DRIVERS_VERSION}}
           token: ${{ secrets.PMR_TOKEN }}
