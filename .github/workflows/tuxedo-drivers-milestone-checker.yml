@@ -18,9 +18,13 @@ on:
         required: true
         default: false
         type: boolean
+      pullRequestNumber:
+        description: Pull request number to auto-approve
+        required: false
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   check-and-release:
@@ -66,3 +70,9 @@ jobs:
           body: Republish a new Tuxedo drivers version
           branch: update-to-${{env.TUXEDO_DRIVERS_VERSION}}
           token: ${{ secrets.PMR_TOKEN }}
+          labels: automerge
+
+      - name: auto-approve previously created PR
+        uses: hmarr/auto-approve-action@v4
+        with:
+          pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
