@@ -44,7 +44,7 @@ jobs:
         if: env.FORCE_REPACKAGE == 'false' || env.TUXEDO_DRIVERS_VERSION != ''
         run: |
           echo "Fetching current version from spec..."
-          releases=$(grep -m1 '^Version:' tuxedo-drivers.spec | awk '{print $2}')
+          releases=$(grep -m1 '^Version:' tuxedo-drivers-kmod.spec | awk '{print $2}')
 
           if [ "$releases" = "${{ env.TUXEDO_DRIVERS_VERSION}}" ]; then
             echo "RELEASE_EXISTS=true" >> $GITHUB_ENV
