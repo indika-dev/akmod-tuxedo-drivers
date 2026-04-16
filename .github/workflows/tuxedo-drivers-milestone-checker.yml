@@ -71,9 +71,11 @@ jobs:
           branch: update-to-${{env.TUXEDO_DRIVERS_VERSION}}
           token: ${{ secrets.PMR_TOKEN }}
           labels: automerge
+        run: |
+          echo "pullRequestNumber=${{steps.cpr.outputs.pull-request-number}}" >> $GITHUB_ENV
 
       - name: auto-approve previously created PR
-        if: ${{ steps.cpr.outputs.pull-request-number }} != ''
+        if: env.pullRequestNumber != ''
         uses: hmarr/auto-approve-action@v4
         with:
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          pull-request-number: ${{ env.pullRequestNumber }}
