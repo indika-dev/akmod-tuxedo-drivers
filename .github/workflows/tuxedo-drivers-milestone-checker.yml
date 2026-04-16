@@ -73,7 +73,7 @@ jobs:
           labels: automerge
 
       - name: auto-approve previously created PR
-        if: github.event.inputs.pullRequestNumber != ''
+        if: github.event.inputs.pull-request-number != ''
         uses: hmarr/auto-approve-action@v4
         with:
-          pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
+          pull-request-number: ${{ github.event.inputs.pull-request-number }}
