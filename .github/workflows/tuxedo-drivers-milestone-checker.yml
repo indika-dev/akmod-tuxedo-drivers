@@ -18,9 +18,6 @@ on:
         required: true
         default: false
         type: boolean
-      pullRequestNumber:
-        description: Pull request number to auto-approve
-        required: false
 
 permissions:
   contents: write
@@ -74,7 +71,7 @@ jobs:
           labels: automerge
 
       - name: Enable auto-merge for PR
-        if: ${{ steps.cpr.outputs.pull-request-number }} != ''
+        if: ${{ steps.cpr.outputs.pull-request-number }} != '' && (env.RELEASE_EXISTS == 'false' || env.FORCE_REPACKAGE == 'true')
         run: |
           gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
         env:
