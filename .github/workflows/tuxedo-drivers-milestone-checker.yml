@@ -54,10 +54,6 @@ jobs:
             sed -i "s/^Version:.*/Version:  ${{ env.TUXEDO_DRIVERS_VERSION}}/" tuxedo-drivers-kmod.spec
           fi
 
-      - name: Debug
-        run: |
-          env
-
       - name: Create PR
         id: cpr
         if: env.RELEASE_EXISTS == 'false' || env.FORCE_REPACKAGE == 'true'
