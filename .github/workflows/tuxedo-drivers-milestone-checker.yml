@@ -20,6 +20,7 @@ on:
         type: boolean
       pullRequestNumber:
         description: Pull request number to auto-approve
+        default: ""
         required: false
 
 permissions:
@@ -71,8 +72,10 @@ jobs:
           branch: update-to-${{env.TUXEDO_DRIVERS_VERSION}}
           token: ${{ secrets.PMR_TOKEN }}
           labels: automerge
-        run: |
+
+      - run: |
           echo "pullRequestNumber=${{steps.cpr.outputs.pull-request-number}}" >> $GITHUB_ENV
+          env
 
       - name: auto-approve previously created PR
         if: env.pullRequestNumber != ''
