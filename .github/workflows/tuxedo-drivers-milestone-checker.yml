@@ -73,9 +73,9 @@ jobs:
           token: ${{ secrets.PMR_TOKEN }}
           labels: automerge
 
-      - name: auto-approve previously created PR
+      - name: Enable auto-merge for PR
         if: ${{ steps.cpr.outputs.pull-request-number }} != ''
-        uses: hmarr/auto-approve-action@v4
-        with:
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          github-token: ${{ secrets.PMR_TOKEN }}
+        run: |
+          gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
