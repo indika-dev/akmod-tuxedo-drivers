@@ -52,15 +52,8 @@ jobs:
           else
             echo "RELEASE_EXISTS=false" >> $GITHUB_ENV
             sed -i "s/^Version:.*/Version:  ${{ env.TUXEDO_DRIVERS_VERSION}}/" tuxedo-drivers-kmod.spec
-            git config --global url."https://${{ secrets.PMR_TOKEN }}@github.com/".insteadOf "https://github.com/"
           fi
-      - name: Configure Git credentials
-        run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-          echo "https://${{ secrets.PMR_TOKEN }}@github.com" > ~/.git-credentials
-          git config --global credential.helper store
-  
+
       - name: Create PR
         id: cpr
         if: env.RELEASE_EXISTS == 'false' || env.FORCE_REPACKAGE == 'true'
@@ -78,4 +71,4 @@ jobs:
         run: |
           gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash
         env:
-          GITHUB_TOKEN: ${{ secrets.PMR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
