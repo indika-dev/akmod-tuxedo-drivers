@@ -52,6 +52,7 @@ jobs:
           else
             echo "RELEASE_EXISTS=false" >> $GITHUB_ENV
             sed -i "s/^Version:.*/Version:  ${{ env.TUXEDO_DRIVERS_VERSION}}/" tuxedo-drivers-kmod.spec
+            git config --global url."https://${{ secrets.PMR_TOKEN }}@github.com/".insteadOf "https://github.com/"
           fi
 
       - name: Create PR
