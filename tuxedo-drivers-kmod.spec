@@ -9,7 +9,7 @@
 %endif
 
 Name:           %{modname}-kmod
-Version:  4.25.1_rc
+Version:  4.25.2_rc
 Release:        1%{?dist}
 Summary:        Tuxedo drivers as akmod
 Group:          System Environment/Kernel
